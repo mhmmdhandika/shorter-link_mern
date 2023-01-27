@@ -12,6 +12,10 @@
     --neutral-very-dark-blue: 255 11% 22%;
     --neutral-very-dark-violet: 260 8% 14%;
   }
+
+  html {
+    @apply overflow-x-hidden;
+  }
 }
 
 @layer components {
