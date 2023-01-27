@@ -38,7 +38,7 @@ function Navbar() {
         <span></span>
       </button>
       <nav
-        className='hidden grow text-lg text-center text-white absolute top-24 p-10 left-7 right-7 bg-primary-dark-violet rounded-xl lg:text-base lg:p-0 lg:text-neutral-grayfish-violet lg:flex lg:bg-transparent lg:static justify-between items-center'
+        className='hidden grow text-lg text-center text-white absolute top-24 p-10 left-7 right-7 bg-primary-dark-violet rounded-xl justify-between items-center lg:text-base lg:p-0 lg:text-neutral-grayfish-violet lg:flex lg:bg-transparent lg:static'
         ref={navContent}
       >
         <ul className='mr-auto flex flex-col gap-y-6 cursor-pointer lg:flex-row lg:gap-x-6'>
