@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --primary-cyan: 180 66% 49%;
+    --primary-dark-violet: 257 27% 26%;
+    --secondary-red: 0 87% 67%;
+    --neutral-gray: 0 0% 75%;
+    --neutral-grayfish-violet: 257 7% 63%;
+    --neutral-very-dark-blue: 255 11% 22%;
+    --neutral-very-dark-violet: 260 8% 14%;
+  }
+}
+
+@layer components {
+  .partial-base-style {
+    @apply max-w-[80rem] mx-auto px-6 lg:max-w-[75rem];
+  }
+
+  /* hamburger */
+  .hamburger-icon {
+    @apply w-7 h-6 flex flex-col justify-between lg:hidden;
+  }
+
+  .hamburger-icon span {
+    @apply h-[4px] w-full block bg-neutral-grayfish-violet;
+  }
+
+  .hamburger-active span {
+    @apply bg-primary-dark-violet;
+  }
+  /* end hamburger */
+
+  .primary-button {
+    @apply bg-primary-cyan text-white rounded-3xl px-8 py-3 font-bold hover:contrast-[1.3];
+  }
+}
