@@ -1,0 +1,48 @@
+{
+  "features": [
+    {
+      "name": "Link Shortening",
+      "url": "#"
+    },
+    {
+      "name": "Branded Links",
+      "url": "#"
+    },
+    {
+      "name": "Analytics",
+      "url": "#"
+    }
+  ],
+  "resources": [
+    {
+      "name": "Blog",
+      "url": "#"
+    },
+    {
+      "name": "Developers",
+      "url": "#"
+    },
+    {
+      "name": "Support",
+      "url": "#"
+    }
+  ],
+  "company": [
+    {
+      "name": "About",
+      "url": "#"
+    },
+    {
+      "name": "Our teams",
+      "url": "#"
+    },
+    {
+      "name": "Careers",
+      "url": "#"
+    },
+    {
+      "name": "Contact",
+      "url": "#"
+    }
+  ]
+}

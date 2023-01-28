@@ -15,7 +15,7 @@ export default function Home() {
           width={400}
           height={400}
           alt='Illustration working'
-          className='-mr-44 sm:w-[800px] lg:order-last'
+          className='-mr-44gi sm:w-[800px] lg:order-last'
         />
         <div className='mt-6'>
           <h1 className='grow text-neutral-very-dark-violet text-[2.5rem] font-extrabold leading-[3.7rem] lg:leading-[5rem] lg:text-7xl'>
