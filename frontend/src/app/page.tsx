@@ -69,6 +69,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* CTA button section */}
+      <section
+        id='starter'
+        className='bg-primary-dark-violet bg-boost-mobile bg-no-repeat bg-center bg-cover text-center py-16 lg:bg-boost-desktop'
+      >
+        <h1 className='text-3xl font-extrabold text-white lg:text-4xl'>
+          Boost your links today
+        </h1>
+        <button className='primary-button mt-5'>Get Started</button>
+      </section>
     </>
   );
 }
