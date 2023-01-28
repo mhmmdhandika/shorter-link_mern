@@ -15,13 +15,13 @@ export default function Home() {
           width={200}
           height={200}
           alt='Illustration working'
-          className='-mr-44 sm:w-[800px] lg:order-last'
+          className='-mr-52 sm:w-[800px] lg:order-last'
         />
         <div className='mt-6'>
-          <h1 className='grow text-neutral-very-dark-violet text-[2.5rem] font-extrabold leading-[3.7rem] lg:leading-[5rem] lg:text-7xl'>
+          <h1 className='grow text-neutral-very-dark-violet text-[2.5rem] font-bold leading-[3.7rem] lg:leading-[5rem] lg:text-7xl'>
             More than just shorter links
           </h1>
-          <p className={`text-neutral-grayfish-violet my-4 text-xl lg:w-[70%]`}>
+          <p className={`text-neutral-grayfish-violet my-4 text-xl lg:w-[80%]`}>
             Build your brand's recognition and get detailed insights on how your
             links are performing.
           </p>
@@ -74,7 +74,7 @@ export default function Home() {
         id='starter'
         className='bg-primary-dark-violet bg-boost-mobile bg-no-repeat bg-center bg-cover text-center py-16 lg:bg-boost-desktop'
       >
-        <h1 className='text-3xl font-extrabold text-white lg:text-4xl'>
+        <h1 className='text-3xl font-bold text-white lg:text-4xl'>
           Boost your links today
         </h1>
         <button className='primary-button mt-5'>Get Started</button>

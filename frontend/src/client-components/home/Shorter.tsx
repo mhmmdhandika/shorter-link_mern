@@ -10,7 +10,7 @@ function Shorter() {
     text: '',
   });
 
-  const baseAPI = 'https://api.shrtco.de/v2/';
+  // const baseAPI = 'https://api.shrtco.de/v2/';
 
   return (
     <section id='shorten' className='mt-32 py-3 bg-neutral-light'>
