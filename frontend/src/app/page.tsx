@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import Shorter from '../client-components/home/Shorter';
 import excessList from '@/data/excessList.json';
 import Button from '@/components/Button';
@@ -84,9 +85,11 @@ export default function Home() {
         <h1 className='text-3xl font-bold text-white lg:text-4xl'>
           Boost your links today
         </h1>
-        <Button primary className='mt-5'>
-          Get Started
-        </Button>
+        <Link href='/shorter'>
+          <Button primary className='mt-5'>
+            Get Started
+          </Button>
+        </Link>
       </section>
     </>
   );

@@ -36,11 +36,31 @@
   }
 
   .hamburger-icon span {
-    @apply h-[4px] w-full block bg-neutral-grayfish-violet;
+    @apply h-[4px] w-full block bg-neutral-grayfish-violet transition-all duration-300 ease-in-out;
   }
 
-  .hamburger-active span {
+  .hamburger-icon--active span {
     @apply bg-primary-dark-violet;
+  }
+
+  .hamburger-icon > span:nth-child(1) {
+    @apply origin-top-left;
+  }
+
+  .hamburger-icon > span:nth-child(3) {
+    @apply origin-bottom-left;
+  }
+
+  .hamburger-icon--active > span:nth-child(1) {
+    @apply rotate-[50deg];
+  }
+
+  .hamburger-icon--active > span:nth-child(2) {
+    @apply scale-0;
+  }
+
+  .hamburger-icon--active > span:nth-child(3) {
+    @apply -rotate-[50deg];
   }
   /* end hamburger */
 

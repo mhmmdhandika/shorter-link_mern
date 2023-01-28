@@ -12,7 +12,7 @@ function Navbar() {
 
   const handleHamburger = () => {
     navContent.current?.classList.toggle('hidden');
-    hamburger.current?.classList.toggle('hamburger-active');
+    hamburger.current?.classList.toggle('hamburger-icon--active');
   };
 
   return (
