@@ -12,7 +12,7 @@ export default function Home() {
       >
         <Image
           src='/assets/images/illustration-working.svg'
-          width={200}
+          width={450}
           height={200}
           alt='Illustration working'
           className='-mr-52 sm:w-[800px] lg:order-last'
