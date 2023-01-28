@@ -15,6 +15,10 @@
     --neutral-very-dark-violet: 260 8% 14%;
   }
 
+  * {
+    @apply selection:bg-primary-cyan selection:text-white;
+  }
+
   html {
     @apply overflow-x-hidden;
     font-family: 'Poppins' sans-serif;
