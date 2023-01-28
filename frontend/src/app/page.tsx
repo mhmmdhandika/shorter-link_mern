@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Shorter from './client-components/Shorter';
+import Shorter from '../client-components/home/Shorter';
 import excessList from '@/data/excessList.json';
 
 export default function Home() {
