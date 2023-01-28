@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Shorter from '../client-components/home/Shorter';
 import excessList from '@/data/excessList.json';
+import Button from '@/components/Button';
 
 export default function Home() {
   return (
@@ -25,7 +26,13 @@ export default function Home() {
             Build your brand's recognition and get detailed insights on how your
             links are performing.
           </p>
-          <button className='my-4 primary-button'>Get Started</button>
+          <Button
+            href='#shorter'
+            primary
+            className='mt-4 w-fit block mx-auto lg:mx-0'
+          >
+            Get started
+          </Button>
         </div>
       </section>
       {/* Shorter link section (client component) */}
@@ -77,7 +84,9 @@ export default function Home() {
         <h1 className='text-3xl font-bold text-white lg:text-4xl'>
           Boost your links today
         </h1>
-        <button className='primary-button mt-5'>Get Started</button>
+        <Button primary className='mt-5'>
+          Get Started
+        </Button>
       </section>
     </>
   );

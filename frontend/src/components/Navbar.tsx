@@ -2,7 +2,9 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import pagesList from '../data/pages.json';
+import Button from './Button';
 
 function Navbar() {
   const navContent = useRef<null | HTMLDivElement>(null);
@@ -43,8 +45,13 @@ function Navbar() {
           <ul className='mr-auto flex flex-col gap-y-6 cursor-pointer lg:flex-row lg:gap-x-6'>
             {pagesList.map((item, index) => {
               return (
-                <li key={index} className='lg:hover:text-primary-dark-violet'>
-                  {item.name}
+                <li key={index}>
+                  <Link
+                    href={item.href}
+                    className='lg:hover:text-primary-dark-violet'
+                  >
+                    {item.name}
+                  </Link>
                 </li>
               );
             })}
@@ -54,7 +61,9 @@ function Navbar() {
             <button className='px-8 lg:py-3 lg:hover:text-primary-dark-violet'>
               Login
             </button>
-            <button className='px-8 py-3 primary-button'>Sign Up</button>
+            <Button primary className='px-8 py-3'>
+              Sign Up
+            </Button>
           </div>
         </nav>
       </div>

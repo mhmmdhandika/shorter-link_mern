@@ -13,7 +13,7 @@ function Shorter() {
   // const baseAPI = 'https://api.shrtco.de/v2/';
 
   return (
-    <section id='shorten' className='mt-32 py-3 bg-neutral-light'>
+    <section id='shorter' className='mt-32 py-3 bg-neutral-light scroll-m-60'>
       <div className='partial-base-style'>
         <form className='-mt-20 bg-primary-dark-violet bg-shorten-mobile bg-no-repeat bg-right-top py-6 px-5 flex flex-col gap-5 justify-between items-center rounded-xl lg:bg-shorten-desktop lg:bg-cover lg:flex-row lg:py-10 lg:px-14'>
           <div className='w-full relative mb-5 lg:mb-0'>

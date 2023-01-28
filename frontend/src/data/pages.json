@@ -1,14 +1,14 @@
 [
   {
     "name": "About",
-    "href": "#"
+    "href": "/about"
   },
   {
     "name": "Pricing",
-    "href": "#"
+    "href": "/pricing"
   },
   {
     "name": "Contact",
-    "href": "#"
+    "href": "/contact"
   }
 ]
