@@ -1,6 +1,13 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Providers from '@/providers/Providers';
+import { Poppins } from '@next/font/google';
 import './globals.css';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+});
 
 export default function RootLayout({
   children,
@@ -10,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head />
-      <body>
-        <Navbar />
-        {children}
-        <Footer />
+      <body className={poppins.className}>
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
