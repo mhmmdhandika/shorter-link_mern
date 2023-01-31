@@ -1,6 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { ThunkDispatch } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeInputLink } from '@/features/shorter/shorterSlice';
+import { getShortenLinks } from '@/features/shorter/shorterSlice';
+import { RootState } from '@/store';
 
 function Shorter() {
   const [inputLink, setInputLink] = useState('');
@@ -10,7 +15,11 @@ function Shorter() {
     text: '',
   });
 
-  const baseAPI = 'https://api.shrtco.de/v2/';
+  const { result } = useSelector((store: RootState) => store.shorter);
+
+  console.log(result);
+
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
   return (
     <section id='shorter' className='mt-32 py-3 bg-neutral-light scroll-m-60'>
@@ -25,8 +34,8 @@ function Shorter() {
               }`}
               // value={inputLink}
               onChange={e => {
-                setFormState(true);
-                setInputLink(e.target.value);
+                const inputValue = e.target.value;
+                dispatch(changeInputLink(inputValue));
               }}
               required
             />
@@ -39,9 +48,9 @@ function Shorter() {
             </p>
           </div>
           <button
-            type='submit'
+            type='button'
             className='min-w-[200px] w-full primary-button border-2 border-primary-cyan rounded-lg lg:rounded-xl lg:flex-1'
-            // onClick={getShortLink}
+            onClick={() => dispatch(getShortenLinks())}
           >
             Shorten it!
           </button>
