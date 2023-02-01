@@ -30,8 +30,6 @@ function Button(props: ButtonTypes) {
     } ${customStyles.join(' ')}`,
   };
 
-  console.log(elementProps);
-
   if (href) {
     return createElement('a', { ...elementProps, href }, children);
   }

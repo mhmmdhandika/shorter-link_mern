@@ -39,7 +39,7 @@ export default function Home() {
       {/* Shorter link section (client component) */}
       <Shorter />
       {/* Excess section */}
-      <section className='py-28 bg-neutral-light'>
+      <section className='py-28 bg-neutral-slate'>
         <div className='partial-base-style'>
           <div className='mb-16 text-center'>
             <h1 className='font-bold text-4xl text-primary-dark-violet'>

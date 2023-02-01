@@ -1,6 +1,7 @@
 import { RootState } from '@/store';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
+import useCopyTextToClipboard from '@/hooks/useCopyTextToClipboard';
 
 type initialStateTypes = {
   inputLink: string;
@@ -70,23 +71,40 @@ const shorterSlice = createSlice({
     changeInputLink: (state, action) => {
       state.inputLink = action.payload;
     },
+    copyShortLink: (state, { payload }) => {
+      useCopyTextToClipboard(payload);
+    },
+    changeCopyState: (
+      state,
+      action: PayloadAction<{ isCopied: boolean; text: string }>
+    ) => {
+      state.copyText = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
       .addCase(getShortenLinks.pending, state => {
-        // console.log(state.result);
+        state.isLoading = true;
       })
       .addCase(getShortenLinks.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+
         if (payload === undefined) {
           return;
         }
 
         if (payload?.ok === 'false') {
-          console.log(payload?.error);
-        } else {
+          swal({
+            icon: 'error',
+            title: "Something's wrong",
+            text: payload?.error,
+          });
+        }
+
+        if (payload?.ok) {
           const result = payload?.result;
 
-          state.result.push({
+          state.result.unshift({
             code: result?.code,
             shortLink: result?.short_link,
             fullShortLink: result?.full_short_link,
@@ -95,10 +113,11 @@ const shorterSlice = createSlice({
         }
       })
       .addCase(getShortenLinks.rejected, state => {
-        console.log(state.result);
+        state.isLoading = false;
       });
   },
 });
 
 export default shorterSlice.reducer;
-export const { changeInputLink } = shorterSlice.actions;
+export const { changeInputLink, copyShortLink, changeCopyState } =
+  shorterSlice.actions;
