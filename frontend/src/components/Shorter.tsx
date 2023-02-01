@@ -2,14 +2,17 @@
 
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeInputLink } from '@/features/shorter/shorterSlice';
+import {
+  changeFormState,
+  changeInputLink,
+} from '@/features/shorter/shorterSlice';
 import { getShortenLinks } from '@/features/shorter/shorterSlice';
 import { RootState } from '@/store';
 import Button from '@/components/Button';
 import ShortLinkCard from '@/components/ShortLinkCard';
 
 function Shorter() {
-  const { isLoading, result } = useSelector(
+  const { formState, isLoading, result } = useSelector(
     (store: RootState) => store.shorter
   );
 
@@ -31,17 +34,22 @@ function Shorter() {
             <input
               type='url'
               placeholder='Shorten a link here...'
-              className={`outline-none w-full px-5 py-3 rounded-lg border-2 border-white peer lg:rounded-xl lg:flex-auto`}
+              className={`outline-none w-full px-5 py-3 rounded-lg border-2 border-white peer lg:rounded-xl lg:flex-auto ${
+                formState && 'invalid:border-secondary-red'
+              }`}
               onChange={e => {
                 const inputValue = e.target.value;
+                dispatch(changeFormState(true));
                 dispatch(changeInputLink(inputValue));
               }}
               required
             />
             <p
-              className={`invisible mt-1 absolute w-full justify-self-start text-sm text-secondary-red`}
+              className={`invisible mt-1 absolute w-full justify-self-start text-sm text-secondary-red ${
+                formState && 'peer-invalid:visible'
+              }`}
             >
-              Please add a link
+              Please add a correct link
             </p>
           </div>
           <Button
