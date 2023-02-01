@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import Shorter from '../client-components/home/Shorter';
+import Shorter from '../components/Shorter';
 import excessList from '@/data/excessList.json';
 import Button from '@/components/Button';
 
