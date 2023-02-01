@@ -1,10 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 import Shorter from '../components/Shorter';
 import excessList from '@/data/excessList.json';
 import Button from '@/components/Button';
+import ShortLinkCard from '@/components/ShortLinkCard';
 
 export default function Home() {
+  // const { result } = useSelector((store: RootState) => store.shorter);
+
   return (
     <>
       {/* Jumbotron */}
@@ -36,8 +41,13 @@ export default function Home() {
           </Button>
         </div>
       </section>
-      {/* Shorter link section (client component) */}
-      <Shorter />
+      {/* Shorter link section */}
+      <section id='shorter' className='mt-32 py-3 bg-neutral-slate scroll-m-60'>
+        <div className='partial-base-style'>
+          <Shorter />
+          <ShortLinkCard />
+        </div>
+      </section>
       {/* Excess section */}
       <section className='py-28 bg-neutral-slate'>
         <div className='partial-base-style'>
