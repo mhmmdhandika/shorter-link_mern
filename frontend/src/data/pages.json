@@ -4,11 +4,11 @@
     "href": "/"
   },
   {
-    "name": "About",
-    "href": "/about"
-  },
-  {
     "name": "Shorter",
     "href": "/shorter"
+  },
+  {
+    "name": "About",
+    "href": "/about"
   }
 ]
