@@ -68,11 +68,14 @@ const shorterSlice = createSlice({
   name: 'shorter',
   initialState,
   reducers: {
-    changeInputLink: (state, action) => {
+    changeFormState: (state, action: PayloadAction<boolean>) => {
+      state.formState = action.payload;
+    },
+    changeInputLink: (state, action: PayloadAction<string>) => {
       state.inputLink = action.payload;
     },
-    copyShortLink: (state, { payload }) => {
-      useCopyTextToClipboard(payload);
+    copyShortLink: (state, action: PayloadAction<string>) => {
+      useCopyTextToClipboard(action.payload);
     },
     changeCopyState: (
       state,
@@ -119,5 +122,9 @@ const shorterSlice = createSlice({
 });
 
 export default shorterSlice.reducer;
-export const { changeInputLink, copyShortLink, changeCopyState } =
-  shorterSlice.actions;
+export const {
+  changeFormState,
+  changeInputLink,
+  copyShortLink,
+  changeCopyState,
+} = shorterSlice.actions;
