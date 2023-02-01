@@ -132,6 +132,7 @@ const shorterSlice = createSlice({
 });
 
 export default shorterSlice.reducer;
+
 export const {
   changeFormState,
   changeInputLink,
