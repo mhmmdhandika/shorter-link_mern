@@ -2,6 +2,8 @@ import { RootState } from '@/store';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
 import useCopyTextToClipboard from '@/hooks/useCopyTextToClipboard';
+import useGetCurrentDate from '@/hooks/useGetCurrentDate';
+import useFormatDateToLocale from '@/hooks/useFormatDateToLocale';
 
 type initialStateTypes = {
   inputLink: string;
@@ -15,6 +17,7 @@ type initialStateTypes = {
     shortLink: string;
     fullShortLink: string;
     originalLink: string;
+    created: string;
   }[];
   isLoading: boolean;
 };
@@ -30,12 +33,13 @@ const initialState: initialStateTypes = {
   isLoading: false,
 };
 
+const baseAPI = 'https://api.shrtco.de/v2';
+
 export const getShortenLinks = createAsyncThunk<
   any,
   void,
   { state: RootState }
 >('shorter/getShortenLinks', async (_, { getState }) => {
-  const baseAPI = 'https://api.shrtco.de/v2';
   const shorterState = getState().shorter;
   const url = `${baseAPI}/shorten?url=${shorterState.inputLink}`;
 
@@ -106,12 +110,18 @@ const shorterSlice = createSlice({
 
         if (payload?.ok) {
           const result = payload?.result;
+          const currentDate = useGetCurrentDate();
+          const formatedDateToLocaleEn = useFormatDateToLocale(
+            currentDate,
+            'en-EN'
+          );
 
           state.result.unshift({
             code: result?.code,
             shortLink: result?.short_link,
             fullShortLink: result?.full_short_link,
             originalLink: result?.original_link,
+            created: formatedDateToLocaleEn,
           });
         }
       })

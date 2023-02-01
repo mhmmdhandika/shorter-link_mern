@@ -45,6 +45,7 @@ function ShortLinkCards({ advanced = false }: ElementProps) {
               {advanced && (
                 <Button
                   primary={false}
+                  onClick={() => console.log(code)}
                   className='w-full rounded-lg lg:rounded-xl lg:w-[120px]'
                 >
                   Info
