@@ -11,10 +11,13 @@ import { RootState } from '@/store';
 import Button from '@/components/Button';
 
 interface ShorterTypes {
+  className?: string;
   advanced?: boolean;
 }
 
-function Shorter({ advanced = false }: ShorterTypes) {
+function Shorter({ className, advanced = false }: ShorterTypes) {
+  const customStyle = [className];
+
   const { formState, isLoading } = useSelector(
     (store: RootState) => store.shorter
   );
@@ -29,7 +32,9 @@ function Shorter({ advanced = false }: ShorterTypes) {
   return (
     <form
       onSubmit={handleSubmit}
-      className='-mt-20 bg-primary-dark-violet bg-shorten-mobile bg-no-repeat bg-right-top py-6 px-5 flex flex-col gap-5 justify-between items-center rounded-xl lg:bg-shorten-desktop lg:bg-cover lg:flex-row lg:py-10 lg:px-14'
+      className={`bg-primary-dark-violet bg-shorten-mobile bg-no-repeat bg-right-top py-6 px-5 flex flex-col gap-5 justify-between items-center rounded-xl lg:bg-shorten-desktop lg:bg-cover lg:flex-row lg:py-10 lg:px-14 ${customStyle.join(
+        ' '
+      )}`}
     >
       <div className='w-full relative mb-5 lg:mb-0'>
         <input
