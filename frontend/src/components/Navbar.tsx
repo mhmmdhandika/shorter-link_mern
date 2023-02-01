@@ -48,7 +48,7 @@ function Navbar() {
                 <li key={index}>
                   <Link
                     href={item.href}
-                    className='lg:hover:text-primary-dark-violet'
+                    className='lg:hover:text-primary-dark-violet lg:active:text-black'
                   >
                     {item.name}
                   </Link>
