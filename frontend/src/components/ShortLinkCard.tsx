@@ -23,12 +23,12 @@ function ShortLinkCard({ originalLink, fullShortLink }: ElementProps) {
       <div className='prev-link'>{originalLink}</div>
       <div
         className='shorted-link text-primary-cyan grow text-end'
-        // onCopy={() => {
-        //   setCopyText({ ...copyText, isCopied: true });
-        //   setTimeout(() => {
-        //     setCopyText({ ...copyText, isCopied: false });
-        //   }, 2000);
-        // }}
+        onCopy={() => {
+          dispatch(changeCopyState({ isCopied: true, text: fullShortLink }));
+          setTimeout(() => {
+            dispatch(changeCopyState({ isCopied: false, text: '' }));
+          }, 2000);
+        }}
       >
         {fullShortLink}
       </div>
