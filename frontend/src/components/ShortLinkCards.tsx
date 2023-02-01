@@ -12,7 +12,7 @@ interface ElementProps {
   advanced?: boolean;
 }
 
-function ShortLinkCard({ advanced = false }: ElementProps) {
+function ShortLinkCards({ advanced = false }: ElementProps) {
   const { result, copyText } = useSelector((store: RootState) => store.shorter);
 
   const dispatch = useDispatch();
@@ -65,4 +65,4 @@ function ShortLinkCard({ advanced = false }: ElementProps) {
     </>
   );
 }
-export default ShortLinkCard;
+export default ShortLinkCards;
