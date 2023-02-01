@@ -5,7 +5,7 @@ import { RootState } from '@/store';
 import Shorter from '../components/Shorter';
 import excessList from '@/data/excessList.json';
 import Button from '@/components/Button';
-import ShortLinkCard from '@/components/ShortLinkCard';
+import ShortLinkCards from '@/components/ShortLinkCards';
 
 export default function Home() {
   // const { result } = useSelector((store: RootState) => store.shorter);
@@ -44,8 +44,8 @@ export default function Home() {
       {/* Shorter link section */}
       <section id='shorter' className='mt-32 py-3 bg-neutral-slate scroll-m-60'>
         <div className='partial-base-style'>
-          <Shorter />
-          <ShortLinkCard />
+          <Shorter className='-mt-20' />
+          <ShortLinkCards />
         </div>
       </section>
       {/* Excess section */}
