@@ -42,6 +42,7 @@ function ShortLinkCards({ advanced = false }: ElementProps) {
               {fullShortLink}
             </div>
             <div className='w-full flex flex-col justify-end gap-3 lg:w-fit lg:flex-row'>
+              {/* TODO: create the info button functionality */}
               {advanced && (
                 <Button
                   primary={false}
