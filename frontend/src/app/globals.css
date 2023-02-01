@@ -63,8 +63,16 @@
   /* end hamburger */
 
   /* basic button styles */
+  .button {
+    @apply rounded-3xl px-8 py-3 font-bold hover:contrast-[1.3] focus:outline-transparent;
+  }
+
   .primary-button {
-    @apply bg-primary-cyan text-white rounded-3xl px-8 py-3 font-bold hover:contrast-[1.3] focus:outline-transparent;
+    @apply button bg-primary-cyan text-neutral-white;
+  }
+
+  .secondary-button {
+    @apply button bg-primary-dark-violet text-neutral-white;
   }
 
   .copy-button--active {

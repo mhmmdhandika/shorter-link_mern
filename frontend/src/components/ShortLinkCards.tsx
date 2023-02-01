@@ -41,24 +41,34 @@ function ShortLinkCards({ advanced = false }: ElementProps) {
             >
               {fullShortLink}
             </div>
-            <Button
-              type='button'
-              primary
-              className={`w-full rounded-lg lg:rounded-xl lg:w-[120px] ${
-                copyText.text === fullShortLink && 'copy-button--active'
-              }`}
-              onClick={() => {
-                dispatch(copyShortLink(fullShortLink));
-                dispatch(
-                  changeCopyState({ isCopied: true, text: fullShortLink })
-                );
-                setTimeout(() => {
-                  dispatch(changeCopyState({ isCopied: false, text: '' }));
-                }, 2000);
-              }}
-            >
-              {copyText.text === fullShortLink ? 'Copied!' : 'Copy'}
-            </Button>
+            <div className='w-full flex flex-col justify-end gap-3 lg:w-fit lg:flex-row'>
+              {advanced && (
+                <Button
+                  primary={false}
+                  className='w-full rounded-lg lg:rounded-xl lg:w-[120px]'
+                >
+                  Info
+                </Button>
+              )}
+              <Button
+                type='button'
+                primary
+                className={`w-full rounded-lg lg:rounded-xl lg:w-[120px] ${
+                  copyText.text === fullShortLink && 'copy-button--active'
+                }`}
+                onClick={() => {
+                  dispatch(copyShortLink(fullShortLink));
+                  dispatch(
+                    changeCopyState({ isCopied: true, text: fullShortLink })
+                  );
+                  setTimeout(() => {
+                    dispatch(changeCopyState({ isCopied: false, text: '' }));
+                  }, 2000);
+                }}
+              >
+                {copyText.text === fullShortLink ? 'Copied!' : 'Copy'}
+              </Button>
+            </div>
           </div>
         );
       })}

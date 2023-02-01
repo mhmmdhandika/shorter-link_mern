@@ -1,19 +1,13 @@
 import Shorter from '@/components/Shorter';
-import ShorterLinkCards from '@/components/ShortLinkCards';
+import ShortLinkCards from '@/components/ShortLinkCards';
 
 function ShorterPage() {
   return (
     <>
-      {/* <h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-        enim odit tenetur fuga nesciunt nostrum laudantium vel saepe tempora
-        necessitatibus, illum earum culpa animi? Odio sunt temporibus qui nobis
-        unde.
-      </h1> */}
-      <section>
+      <section id='shorter' className='mt-32 py-3 bg-neutral-slate'>
         <div className='partial-base-style'>
-          <Shorter />
-          <ShorterLinkCards />
+          <Shorter className='-mt-20' />
+          <ShortLinkCards advanced />
         </div>
       </section>
     </>
