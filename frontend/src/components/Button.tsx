@@ -5,29 +5,37 @@ import { createElement } from 'react';
 interface ButtonTypes {
   children: React.ReactNode;
   href?: string;
+  type?: string;
   primary: boolean;
-  className: string;
-  onClick?: () => void;
+  className?: string;
+  [x: string]: any;
 }
 
-function Button({
-  children,
-  href,
-  primary = true,
-  className,
-  onClick,
-}: ButtonTypes) {
+function Button(props: ButtonTypes) {
+  const {
+    children,
+    href,
+    type = 'button',
+    primary = true,
+    className,
+    ...other
+  } = props;
+
   const customStyles = [className];
 
   const elementProps = {
-    onClick,
-    className: `${primary && 'primary-button'} ${customStyles.join(' ')}`,
+    ...other,
+    className: `${
+      primary ? 'primary-button' : 'secondary-button'
+    } ${customStyles.join(' ')}`,
   };
+
+  console.log(elementProps);
 
   if (href) {
     return createElement('a', { ...elementProps, href }, children);
   }
 
-  return createElement('button', { ...elementProps }, children);
+  return createElement('button', { ...elementProps, type }, children);
 }
 export default Button;
