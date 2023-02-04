@@ -58,12 +58,16 @@ function Navbar() {
           </ul>
           <hr className='my-6 lg:hidden' />
           <div id='user-sign-in' className='flex flex-col gap-y-6 lg:flex-row'>
-            <button className='px-8 lg:py-3 lg:hover:text-primary-dark-violet'>
-              Login
-            </button>
-            <Button primary className='px-8 py-3'>
-              Sign Up
-            </Button>
+            <Link href='/login'>
+              <button className='px-8 lg:py-3 lg:hover:text-primary-dark-violet'>
+                Login
+              </button>
+            </Link>
+            <Link href='/signup'>
+              <Button primary className='w-full px-8 py-3'>
+                Sign Up
+              </Button>
+            </Link>
           </div>
         </nav>
       </div>
