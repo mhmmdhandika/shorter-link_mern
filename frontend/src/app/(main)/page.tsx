@@ -1,15 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
-import Shorter from '../components/Shorter';
+import Shorter from '@/components/Shorter';
 import excessList from '@/data/excessList.json';
 import Button from '@/components/Button';
 import ShortLinkCards from '@/components/ShortLinkCards';
 
 export default function Home() {
-  // const { result } = useSelector((store: RootState) => store.shorter);
-
   return (
     <>
       {/* Jumbotron */}
