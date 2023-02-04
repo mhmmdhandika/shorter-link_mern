@@ -13,9 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang='en' className='h-full'>
       <head />
-      <body className={poppins.className}>
+      <body className={`${poppins.className} h-full`}>
         <Providers>{children}</Providers>
       </body>
     </html>
