@@ -7,22 +7,23 @@ import Link from 'next/link';
 
 function Login() {
   return (
-    <section className='relative w-full h-full text-neutral-very-dark-violet grid lg:grid-cols-[50%_50%]'>
+    <section className='relative w-full h-full text-neutral-very-dark-violet grid justify-center items-center lg:grid-cols-[50%_50%]'>
       {/* link to back to home */}
       <Link
         href='/'
-        className='absolute top-7 left-7 flex gap-2 text-white items-center mb-5'
+        className='absolute top-7 left-7 flex gap-2 items-center mb-5 text-black lg:text-white'
       >
         <Image
           src='/assets/images/back-icon.png'
           alt='back icon'
           width={20}
           height={20}
+          className='brightness-0 lg:brightness-100'
         />
         Back to home
       </Link>
       {/* image decoration */}
-      <div className="hidden lg:block lg:bg-[url('/assets/images/bg-blob.svg')] lg:bg-no-repeat lg:bg-cover lg:flex lg:flex-col lg:justify-center lg:items-center">
+      <div className="hidden lg:w-full lg:h-full lg:block lg:bg-[url('/assets/images/bg-blob.svg')] lg:bg-no-repeat lg:bg-cover lg:flex lg:flex-col lg:justify-center lg:items-center">
         <Image
           src='/assets/images/login.svg'
           alt='Sign up image'
@@ -34,8 +35,8 @@ function Login() {
         </h1>
       </div>
       {/* form sign up */}
-      <div className='flex justify-center items-center'>
-        <form className='bg-neutral-white w-fit flex flex-col justify-center items-center p-10 rounded-lg'>
+      <div className='w-full p-10 flex justify-center items-center sm:mx-auto sm:max-w-[28rem] lg:max-w-auto'>
+        <form className='w-full bg-neutral-white flex flex-col justify-center items-center rounded-lg'>
           <Image
             src='/assets/images/profile.svg'
             alt='profile icon'
@@ -46,7 +47,7 @@ function Login() {
                 'invert(78%) sepia(54%) saturate(666%) hue-rotate(122deg) brightness(88%) contrast(82%)',
             }}
           />
-          <div>
+          <div className='w-full'>
             {/* email */}
             <LabelInput label='Email' name='email' id='email' type='email' />
             {/* password */}
