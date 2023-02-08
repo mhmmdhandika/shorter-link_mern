@@ -1,4 +1,4 @@
-import { RootState } from '@/store';
+import type { RootState } from '@/store';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
 import useCopyTextToClipboard from '@/hooks/useCopyTextToClipboard';

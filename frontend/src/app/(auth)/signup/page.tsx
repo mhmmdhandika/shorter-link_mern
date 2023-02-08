@@ -1,11 +1,32 @@
 'use client';
 
+import type { RootState } from '@/store';
+import { useState } from 'react';
+import type { ChangeEvent } from 'react';
 import Image from 'next/image';
 import LabelInput from '@/components/LabelInput';
 import Button from '@/components/Button';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { signup } from '@/features/user/userSlice';
+import type { ThunkDispatch } from '@reduxjs/toolkit';
 
-function Signup() {
+function SignupPage() {
+  const { isLoading } = useSelector((store: RootState) => store.user);
+
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+
+  const [userSignupData, setUserSignupData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    dispatch(signup(userSignupData));
+  };
+
   return (
     <section className='relative w-full h-full text-neutral-very-dark-violet grid justify-center items-center lg:grid-cols-[50%_50%]'>
       {/* link to back to home */}
@@ -23,7 +44,7 @@ function Signup() {
         Back to home
       </Link>
       {/* image decoration */}
-      <div className="hidden lg:w-full lg:h-full lg:block lg:bg-[url('/assets/images/bg-blob.svg')] lg:bg-no-repeat lg:bg-cover lg:flex lg:flex-col lg:justify-center lg:items-center">
+      <div className="hidden lg:w-full lg:h-full lg:bg-[url('/assets/images/bg-blob.svg')] lg:bg-no-repeat lg:bg-cover lg:flex lg:flex-col lg:justify-center lg:items-center">
         <Image
           src='/assets/images/signup.svg'
           alt='Sign up image'
@@ -36,7 +57,10 @@ function Signup() {
       </div>
       {/* form sign up */}
       <div className='w-full p-10 flex justify-center items-center sm:mx-auto sm:max-w-[28rem] lg:max-w-auto'>
-        <form className='w-full bg-neutral-white flex flex-col justify-center items-center rounded-lg'>
+        <form
+          className='w-full bg-neutral-white flex flex-col justify-center items-center rounded-lg'
+          onSubmit={e => handleSubmit(e)}
+        >
           <Image
             src='/assets/images/profile.svg'
             alt='profile icon'
@@ -49,18 +73,45 @@ function Signup() {
           />
           <div className='w-full'>
             {/* name */}
-            <LabelInput label='Name' name='name' id='name' type='text' />
+            <LabelInput
+              label='Name'
+              name='name'
+              id='name'
+              type='text'
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setUserSignupData({ ...userSignupData, name: e.target.value });
+              }}
+            />
             {/* email */}
-            <LabelInput label='Email' name='email' id='email' type='email' />
+            <LabelInput
+              label='Email'
+              name='email'
+              id='email'
+              type='email'
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setUserSignupData({ ...userSignupData, email: e.target.value });
+              }}
+            />
             {/* password */}
             <LabelInput
               label='Password'
               name='password'
               id='password'
               type='password'
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setUserSignupData({
+                  ...userSignupData,
+                  password: e.target.value,
+                });
+              }}
             />
-            <Button primary type='submit' className='w-full rounded-md mt-1'>
-              Sign up
+            <Button
+              primary
+              type='submit'
+              className='w-full rounded-md mt-1'
+              disabled={isLoading ? true : false}
+            >
+              {isLoading ? 'Loading' : 'Sign up'}
             </Button>
             <p className='text-center text-sm mt-8'>
               Already have an account?{' '}
@@ -77,4 +128,4 @@ function Signup() {
     </section>
   );
 }
-export default Signup;
+export default SignupPage;

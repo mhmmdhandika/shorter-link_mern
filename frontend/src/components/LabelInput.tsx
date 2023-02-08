@@ -6,6 +6,7 @@ interface LabelInputTypes {
   containerClassName?: string;
   labelClassName?: string;
   inputClassName?: string;
+  [x: string]: any;
 }
 
 function LabelInput({
@@ -16,6 +17,7 @@ function LabelInput({
   containerClassName,
   labelClassName,
   inputClassName,
+  ...other
 }: LabelInputTypes) {
   const containerStyles = [containerClassName],
     labelStyles = [labelClassName],
@@ -36,6 +38,7 @@ function LabelInput({
         className={`${inputStyles.join(
           ' '
         )} w-full border border-neutral-grayfish-violet/50 bg-slate-100 rounded-md px-3 py-2 focus:outline-primary-cyan invalid:border-secondary-red`}
+        {...other}
       />
     </div>
   );
