@@ -17,7 +17,7 @@ const signUpUser: RequestHandler = async (req, res) => {
     // validation form input
     if (!name) {
       throw Error('Name input must be filled');
-    } else if (!email || !password) {
+    } else if (!email) {
       throw Error('Email input must be filled');
     } else if (!password) {
       throw Error('Password must be filled');
@@ -40,11 +40,19 @@ const signUpUser: RequestHandler = async (req, res) => {
     // create an user document
     const user = await User.create({ name, email, password: hash });
 
+    if (!user) throw Error('user error');
+
     // create a token
     const token = createToken(user._id.toString());
 
     // send a message and token to user
-    res.status(200).json({ message: 'Sign up succeed', token });
+    res.status(200).json({
+      user: {
+        name: user.name,
+        email: user.email,
+      },
+      token,
+    });
   } catch (error: any) {
     // send the error to the user
     res.status(400).json({

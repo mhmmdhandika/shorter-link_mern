@@ -1,8 +1,9 @@
-import { Express } from 'express';
+import type { Express } from 'express';
 const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 import shortLinkRoutes from './routes/shortLinkRoutes';
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -11,6 +12,9 @@ const port = process.env.PORT;
 
 // middleware
 app.use(express.json());
+
+// enable pre-flight requests
+app.options('*', cors());
 
 // connect to db
 const dbURI = `mongodb://0.0.0.0:27017/shorter-link`;
@@ -27,6 +31,27 @@ mongoose
   .catch((error: Error) => {
     console.log(error);
   });
+
+// origins allow
+const allowList = ['http://localhost:3000'];
+
+const corsOptions = {
+  credentials: true,
+  origin: (origin: any, callback: any) => {
+    if (allowList.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.append('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 // user routes
 app.use('/api/user', userRoutes);

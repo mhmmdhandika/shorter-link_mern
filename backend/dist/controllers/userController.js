@@ -27,7 +27,7 @@ const signUpUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (!name) {
             throw Error('Name input must be filled');
         }
-        else if (!email || !password) {
+        else if (!email) {
             throw Error('Email input must be filled');
         }
         else if (!password) {
@@ -46,10 +46,18 @@ const signUpUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const hash = yield bcrypt_1.default.hash(password, salt);
         // create an user document
         const user = yield userModel_1.default.create({ name, email, password: hash });
+        if (!user)
+            throw Error('user error');
         // create a token
         const token = createToken(user._id.toString());
         // send a message and token to user
-        res.status(200).json({ message: 'Sign up succeed', token });
+        res.status(200).json({
+            user: {
+                name: user.name,
+                email: user.email,
+            },
+            token,
+        });
     }
     catch (error) {
         // send the error to the user
