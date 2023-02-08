@@ -90,7 +90,13 @@ const loginUser: RequestHandler = async (req, res) => {
     const token = createToken(user._id.toString());
 
     // send a message and token to user
-    res.status(200).json({ message: 'Login succeed', token });
+    res.status(200).json({
+      user: {
+        name: user.name,
+        email: user.email,
+      },
+      token,
+    });
   } catch (error: any) {
     // send the error
     res.status(400).json({

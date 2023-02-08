@@ -91,7 +91,13 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // create a token
         const token = createToken(user._id.toString());
         // send a message and token to user
-        res.status(200).json({ message: 'Login succeed', token });
+        res.status(200).json({
+            user: {
+                name: user.name,
+                email: user.email,
+            },
+            token,
+        });
     }
     catch (error) {
         // send the error
