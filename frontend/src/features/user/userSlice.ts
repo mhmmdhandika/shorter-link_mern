@@ -6,7 +6,6 @@ type initialStateTypes = {
   user: null | {
     name: string;
     email: string;
-    password: string;
   };
   isLoading: boolean;
 };
@@ -66,12 +65,24 @@ const userSlice = createSlice({
         signup.fulfilled,
         (
           state,
-          { payload }: { payload: { message: string; token: string } }
+          {
+            payload,
+          }: {
+            payload: {
+              user: {
+                name: string;
+                email: string;
+              };
+              token: string;
+            };
+          }
         ) => {
+          state.user = payload.user;
+
           state.isLoading = false;
           swal({
             icon: 'success',
-            title: payload.message,
+            title: 'Signup successfully!',
             text: 'You will redirect to home page',
           });
         }
