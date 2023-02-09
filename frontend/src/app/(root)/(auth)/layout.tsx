@@ -1,4 +1,3 @@
-import Providers from '@/providers/Providers';
 import { Poppins } from '@next/font/google';
 import '@/app/globals.css';
 
@@ -15,9 +14,7 @@ export default function RootLayout({
   return (
     <html lang='en' className='h-full'>
       <head />
-      <body className={`${poppins.className} h-full`}>
-        <Providers>{children}</Providers>
-      </body>
+      <body className={`${poppins.className} h-full`}>{children}</body>
     </html>
   );
 }
