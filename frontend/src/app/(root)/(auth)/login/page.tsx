@@ -10,20 +10,29 @@ import Image from 'next/image';
 import LabelInput from '@/components/LabelInput';
 import Button from '@/components/Button';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 function Login() {
   const { isLoading } = useSelector((store: RootState) => store.user);
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
+  const router = useRouter();
+
   const [userLoginData, setUserLoginData] = useState({
     email: '',
     password: '',
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login(userLoginData));
+    const loginUser = await dispatch(login(userLoginData));
+    const result = loginUser;
+
+    // redirect to home if it's fulfilled
+    if (result.meta.requestStatus === 'fulfilled') {
+      router.push('/');
+    }
   };
 
   return (

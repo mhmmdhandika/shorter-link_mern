@@ -10,11 +10,14 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '@/features/user/userSlice';
 import type { ThunkDispatch } from '@reduxjs/toolkit';
+import { useRouter } from 'next/navigation';
 
 function SignupPage() {
   const { isLoading } = useSelector((store: RootState) => store.user);
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+
+  const router = useRouter();
 
   const [userSignupData, setUserSignupData] = useState({
     name: '',
@@ -22,9 +25,15 @@ function SignupPage() {
     password: '',
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(signup(userSignupData));
+    const signupUser = await dispatch(signup(userSignupData));
+    const result = signupUser;
+
+    // redirect to home if it's fulfilled
+    if (result.meta.requestStatus === 'fulfilled') {
+      router.push('/');
+    }
   };
 
   return (
