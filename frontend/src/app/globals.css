@@ -93,6 +93,10 @@
 }
 
 /* sweet alert */
+.swal-button {
+  @apply hover:bg-primary-cyan;
+}
+
 .swal-button--confirm {
   @apply bg-primary-cyan;
 }
