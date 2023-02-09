@@ -91,3 +91,9 @@
   filter: invert(95%) sepia(82%) saturate(6346%) hue-rotate(125deg)
     brightness(86%) contrast(86%);
 }
+
+/* sweet alert */
+.swal-button--confirm {
+  @apply bg-primary-cyan;
+}
+/* end sweet alert */
