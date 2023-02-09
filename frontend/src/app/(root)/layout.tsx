@@ -8,7 +8,7 @@ import { ThunkDispatch } from '@reduxjs/toolkit';
 import { addUser } from '@/features/user/userSlice';
 
 function RootLayout({ children }: { children: React.ReactNode }) {
-  const { user, keyStorage } = useSelector((store: RootState) => store.user);
+  const { keyStorage } = useSelector((store: RootState) => store.user);
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
