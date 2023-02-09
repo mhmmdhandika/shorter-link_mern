@@ -110,6 +110,12 @@ const userSlice = createSlice({
       state.user = payload.user;
       state.token = payload.token;
     },
+    logout: state => {
+      // delete user data from local storage
+      state.user = null;
+      state.token = null;
+      useLocalStorage('remove', state.keyStorage);
+    },
   },
   extraReducers: builder => {
     // login
@@ -187,4 +193,4 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { addUser } = userSlice.actions;
+export const { addUser, logout } = userSlice.actions;
