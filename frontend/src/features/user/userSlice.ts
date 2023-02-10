@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, ThunkDispatch } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
 import useLocalStorage from '@/hooks/useLocalStorage';
@@ -8,6 +8,7 @@ type initialStateTypes = {
     name: string;
     email: string;
   };
+  trial: null | number;
   token: null | string;
   isLoading: boolean;
   readonly keyStorage: 'SHORTER_LINK__USER';
@@ -15,6 +16,7 @@ type initialStateTypes = {
 
 const initialState: initialStateTypes = {
   user: null,
+  trial: 3,
   token: null,
   isLoading: false,
   keyStorage: 'SHORTER_LINK__USER',
@@ -93,6 +95,11 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    useTrial: state => {
+      if (state.trial !== null) {
+        state.trial! -= 1;
+      }
+    },
     addUser: (
       state,
       {
@@ -193,4 +200,4 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { addUser, logout } = userSlice.actions;
+export const { useTrial, addUser, logout } = userSlice.actions;
