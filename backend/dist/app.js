@@ -15,7 +15,6 @@ const port = process.env.PORT;
 app.use(express.json());
 // enable pre-flight requests
 app.options('*', cors());
-console.log('hai');
 // connect to db
 const dbURI = process.env.MONGODB_URI;
 mongoose.set('strictQuery', false);
@@ -35,10 +34,11 @@ app.use((req, res, next) => {
     res.append('Access-Control-Allow-Headers', 'Content-Type,Authorization');
     next();
 });
+app.get('/', (req, res) => {
+    res.send('Express + TypeScript Server');
+});
 // user routes
 app.use('/api/user', userRoutes);
 // short link routes
 app.use('/api/short-link', shortLinkRoutes_1.default);
-app.get('/', (req, res) => {
-    res.send('Express + TypeScript Server');
-});
+module.exports = app;
