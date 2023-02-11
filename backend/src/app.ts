@@ -24,11 +24,9 @@ mongoose.set('strictQuery', false);
 mongoose
   .connect(dbURI)
   .then(() => {
-    if (port) {
-      app.listen(port, () => {
-        console.log(`[server]: Server is running at http://localhost:${port}`);
-      });
-    }
+    app.listen(port, () => {
+      console.log(`[server]: Server is running at http://localhost:${port}`);
+    });
   })
   .catch((error: Error) => {
     console.log(error);
@@ -41,14 +39,14 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.send('Express + TypeScript Server');
+});
+
 // user routes
 app.use('/api/user', userRoutes);
 
 // short link routes
 app.use('/api/short-link', shortLinkRoutes);
-
-app.get('/', (req, res) => {
-  res.send('Express + TypeScript Server');
-});
 
 module.exports = app;
