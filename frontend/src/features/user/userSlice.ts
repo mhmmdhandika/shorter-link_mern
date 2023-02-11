@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, ThunkDispatch } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
 import useLocalStorage from '@/hooks/useLocalStorage';
@@ -7,8 +7,8 @@ type initialStateTypes = {
   user: null | {
     name: string;
     email: string;
+    user_id: string;
   };
-  trial: null | number;
   token: null | string;
   isLoading: boolean;
   readonly keyStorage: 'SHORTER_LINK__USER';
@@ -16,7 +16,6 @@ type initialStateTypes = {
 
 const initialState: initialStateTypes = {
   user: null,
-  trial: 3,
   token: null,
   isLoading: false,
   keyStorage: 'SHORTER_LINK__USER',
@@ -95,11 +94,6 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    useTrial: state => {
-      if (state.trial !== null) {
-        state.trial! -= 1;
-      }
-    },
     addUser: (
       state,
       {
@@ -109,11 +103,13 @@ const userSlice = createSlice({
           user: {
             name: string;
             email: string;
+            user_id: string;
           };
           token: string;
         };
       }
     ) => {
+      console.log(payload);
       state.user = payload.user;
       state.token = payload.token;
     },
@@ -142,6 +138,7 @@ const userSlice = createSlice({
               user: {
                 name: string;
                 email: string;
+                user_id: string;
               };
               token: string;
             };
@@ -200,4 +197,4 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { useTrial, addUser, logout } = userSlice.actions;
+export const { addUser, logout } = userSlice.actions;

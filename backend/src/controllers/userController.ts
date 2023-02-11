@@ -50,6 +50,7 @@ const signUpUser: RequestHandler = async (req, res) => {
       user: {
         name: user.name,
         email: user.email,
+        user_id: user._id,
       },
       token,
     });
@@ -94,6 +95,7 @@ const loginUser: RequestHandler = async (req, res) => {
       user: {
         name: user.name,
         email: user.email,
+        user_id: user._id,
       },
       token,
     });

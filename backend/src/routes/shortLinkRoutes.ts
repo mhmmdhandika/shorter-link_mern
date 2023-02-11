@@ -1,4 +1,5 @@
 import express from 'express';
+const requireAuth = require('../middleware/requireAuth');
 
 // controller functions
 import {
@@ -8,6 +9,9 @@ import {
 } from '../controllers/shortLinkControllers';
 
 const router = express.Router();
+
+// authorization middleware
+router.use(requireAuth);
 
 // get all short links
 router.get('/', getAllShortLinks);

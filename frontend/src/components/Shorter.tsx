@@ -7,7 +7,6 @@ import {
   changeInputLink,
 } from '@/features/shorter/shorterSlice';
 import { getShortenLinks } from '@/features/shorter/shorterSlice';
-import { useTrial } from '@/features/user/userSlice';
 import { RootState } from '@/store';
 import Button from '@/components/Button';
 import swal from 'sweetalert';
@@ -17,10 +16,10 @@ interface ShorterTypes {
   advanced?: boolean;
 }
 
-function Shorter({ className, advanced = false }: ShorterTypes) {
+function Shorter({ className }: ShorterTypes) {
   const customStyle = [className];
 
-  const { user, trial } = useSelector((store: RootState) => store.user);
+  const { user } = useSelector((store: RootState) => store.user);
 
   const { formState, isLoading } = useSelector(
     (store: RootState) => store.shorter
@@ -34,16 +33,11 @@ function Shorter({ className, advanced = false }: ShorterTypes) {
     if (user !== null) {
       dispatch(getShortenLinks());
     } else {
-      if (trial! > 0) {
-        dispatch(getShortenLinks());
-        dispatch(useTrial());
-      } else {
-        swal({
-          icon: 'warning',
-          title: 'Your trial has been ended',
-          text: "You can login / sign up. Don't worry you can use a fake name, email and password, it just exercise project.",
-        });
-      }
+      swal({
+        icon: 'warning',
+        title: 'You must be logged in.',
+        text: "Don't worry you can use a fake name, email and password, it just exercise project.",
+      });
     }
   };
 

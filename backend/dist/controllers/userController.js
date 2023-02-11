@@ -55,6 +55,7 @@ const signUpUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             user: {
                 name: user.name,
                 email: user.email,
+                user_id: user._id,
             },
             token,
         });
@@ -95,6 +96,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             user: {
                 name: user.name,
                 email: user.email,
+                user_id: user._id,
             },
             token,
         });

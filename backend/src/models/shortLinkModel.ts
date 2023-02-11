@@ -21,9 +21,12 @@ const shortLinkSchema = new Schema({
   originalLink: {
     type: String,
     required: true,
-    unique: true,
   },
   created: {
+    type: String,
+    required: true,
+  },
+  user_id: {
     type: String,
     required: true,
   },

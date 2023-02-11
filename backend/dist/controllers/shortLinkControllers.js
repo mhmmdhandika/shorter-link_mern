@@ -23,13 +23,12 @@ const getAllShortLinks = (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(200).json(result);
     }
     catch (error) {
-        console.log(error);
         res.status(400).json(error);
     }
 });
 exports.getAllShortLinks = getAllShortLinks;
 const addNewShortLink = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { url } = req.body;
+    const { url, user_id } = req.body;
     try {
         // fetch from public api
         const response = yield fetch(`${baseAPI}/shorten?url=${url}`);
@@ -41,15 +40,19 @@ const addNewShortLink = (req, res) => __awaiter(void 0, void 0, void 0, function
         }
         // save to db
         const { result: { code, short_link, full_short_link, original_link }, } = data;
-        shortLinkModel_1.default.create({
+        const newShortLink = yield shortLinkModel_1.default.create({
             code: code,
             shortLink: short_link,
             fullShortLink: full_short_link,
             originalLink: original_link,
             created: (0, useFormatDateToLocale_1.default)((0, useGetCurrentDate_1.default)(), 'en-EN'),
+            user_id,
         });
         // send the response
-        res.status(200).json({ result: 'New short link has been added!' });
+        res.status(200).json({
+            message: 'New short link has been added!',
+            result: newShortLink,
+        });
     }
     catch (error) {
         res.status(400).json({

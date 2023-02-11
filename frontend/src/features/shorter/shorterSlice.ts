@@ -18,6 +18,7 @@ type initialStateTypes = {
     fullShortLink: string;
     originalLink: string;
     created: string;
+    user_id: string;
   }[];
   isLoading: boolean;
 };
@@ -33,7 +34,7 @@ const initialState: initialStateTypes = {
   isLoading: false,
 };
 
-const baseAPI = 'https://api.shrtco.de/v2';
+const baseAPI = 'http://localhost:5000/api/short-link';
 
 export const getShortenLinks = createAsyncThunk<
   any,
@@ -41,24 +42,41 @@ export const getShortenLinks = createAsyncThunk<
   { state: RootState }
 >('shorter/getShortenLinks', async (_, { getState }) => {
   const shorterState = getState().shorter;
-  const url = `${baseAPI}/shorten?url=${shorterState.inputLink}`;
+  const userState = getState().user;
+
+  const url = `${baseAPI}/add-new`;
 
   try {
-    const fetchData = await fetch(url);
+    const fetchData = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userState.token}`,
+      },
+      body: JSON.stringify({
+        url: shorterState.inputLink,
+        user_id: userState.user?.user_id,
+      }),
+    });
+    const result = await fetchData.json();
 
-    // give an error while user provide a wrong input
-    if (fetchData?.ok === false) {
+    // give an error while user provide a wrong input or unauthorized
+    if (result?.error) {
       swal({
-        title: `${fetchData?.status} Bad Request`,
-        text: 'Maybe you provide a wrong input?',
-        icon: 'warning',
+        title: `${fetchData?.status} ${fetchData?.statusText}`,
+        text: `${result?.error.name} - ${result?.error.message}`,
+        icon: 'error',
       });
-
       return undefined;
     }
 
-    const data = await fetchData.json();
-    return data;
+    swal({
+      title: result?.message,
+      icon: 'success',
+      timer: 1000,
+    });
+
+    return result?.result;
   } catch (err: any) {
     return swal({
       title: 'Error',
@@ -96,32 +114,22 @@ const shorterSlice = createSlice({
       .addCase(getShortenLinks.fulfilled, (state, { payload }) => {
         state.isLoading = false;
 
-        if (payload === undefined) {
-          return;
-        }
-
-        if (payload?.ok === 'false') {
-          swal({
-            icon: 'error',
-            title: "Something's wrong",
-            text: payload?.error,
-          });
-        }
-
-        if (payload?.ok) {
-          const result = payload?.result;
+        if (payload !== undefined) {
           const currentDate = useGetCurrentDate();
           const formatedDateToLocaleEn = useFormatDateToLocale(
             currentDate,
             'en-EN'
           );
 
+          console.log(payload?.user_id);
+
           state.result.unshift({
-            code: result?.code,
-            shortLink: result?.short_link,
-            fullShortLink: result?.full_short_link,
-            originalLink: result?.original_link,
+            code: payload?.code,
+            shortLink: payload?.shortLink,
+            fullShortLink: payload?.fullShortLink,
+            originalLink: payload?.originalLink,
             created: formatedDateToLocaleEn,
+            user_id: payload?.user_id,
           });
         }
       })

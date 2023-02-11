@@ -11,13 +11,12 @@ const getAllShortLinks: RequestHandler = async (req, res) => {
 
     res.status(200).json(result);
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
   }
 };
 
 const addNewShortLink: RequestHandler = async (req, res) => {
-  const { url } = req.body;
+  const { url, user_id } = req.body;
 
   try {
     // fetch from public api
@@ -35,16 +34,20 @@ const addNewShortLink: RequestHandler = async (req, res) => {
       result: { code, short_link, full_short_link, original_link },
     } = data;
 
-    ShortLink.create({
+    const newShortLink = await ShortLink.create({
       code: code,
       shortLink: short_link,
       fullShortLink: full_short_link,
       originalLink: original_link,
       created: useFormatDateToLocale(useGetCurrentDate(), 'en-EN'),
+      user_id,
     });
 
     // send the response
-    res.status(200).json({ result: 'New short link has been added!' });
+    res.status(200).json({
+      message: 'New short link has been added!',
+      result: newShortLink,
+    });
   } catch (error: any) {
     res.status(400).json({
       error: {
