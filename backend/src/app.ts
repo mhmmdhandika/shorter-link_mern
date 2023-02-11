@@ -15,7 +15,6 @@ app.use(express.json());
 
 // enable pre-flight requests
 app.options('*', cors());
-console.log('hai');
 
 // connect to db
 const dbURI = process.env.MONGODB_URI;
@@ -25,9 +24,11 @@ mongoose.set('strictQuery', false);
 mongoose
   .connect(dbURI)
   .then(() => {
-    app.listen(port, () => {
-      console.log(`[server]: Server is running at http://localhost:${port}`);
-    });
+    if (port) {
+      app.listen(port, () => {
+        console.log(`[server]: Server is running at http://localhost:${port}`);
+      });
+    }
   })
   .catch((error: Error) => {
     console.log(error);
@@ -49,3 +50,5 @@ app.use('/api/short-link', shortLinkRoutes);
 app.get('/', (req, res) => {
   res.send('Express + TypeScript Server');
 });
+
+module.exports = app;
